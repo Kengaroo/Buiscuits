@@ -1,4 +1,17 @@
-<?php require 'inc/head.php'; ?>
+<?php 
+require 'inc/head.php'; 
+$error = '';
+if (isset($_POST)) {//($_SERVER['REQUEST_METHOD'] ===  'POST') {
+    $name = isset($_POST['loginname']) ? $_POST['loginname']  : '';
+    if ($name) {        
+        $_SESSION['name'] = $name;        
+        header('Location: /index.php');
+    } else {
+        $error = 'Name required';
+    }
+
+}
+?>
 <div class="container" style="margin-top:40px">
     <div class="row">
         <div class="col-sm-6 col-md-4 col-md-offset-4">
@@ -6,6 +19,7 @@
                 <div class="panel-heading">
                     <strong> Sign in to continue</strong>
                 </div>
+                <div class="error"><?=$error;?></div>
                 <div class="panel-body">
                     <form role="form" action="#" method="POST">
                         <fieldset>
